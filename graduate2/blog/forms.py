@@ -1,6 +1,6 @@
 from django import forms
 
-from graduate2.blog.models import Post
+from blog.models import Post
 
 
 class StyleFormMixin:
