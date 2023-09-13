@@ -1,23 +1,16 @@
 from django.db import models
 
+from graduate2.config.settings import AUTH_USER_MODEL
+
 NULLABLE = {'null': True, 'blank': True}
 
 
-class DefaultPost(models.Model):
+class Post(models.Model):
     title = models.CharField(max_length=50, verbose_name='Post_title')
     description = models.TextField(verbose_name='Post_description')
     image = models.ImageField(upload_to='media/post/', **NULLABLE, verbose_name='Post_image')
+    owner = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, **NULLABLE, verbose_name='Post_owner')
 
     class Meta:
-        verbose_name = 'Default'
-        verbose_name_plural = 'Defaults'
-
-
-class PremiumPost(models.Model):
-    title = models.CharField(max_length=50, verbose_name='Post_title')
-    description = models.TextField(verbose_name='Post_description')
-    image = models.ImageField(upload_to='media/post/', **NULLABLE, verbose_name='Post_image')
-
-    class Meta:
-        verbose_name = 'Premium'
-        verbose_name_plural = 'Premiums'
+        verbose_name = 'Post'
+        verbose_name_plural = 'Posts'
