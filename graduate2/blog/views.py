@@ -1,3 +1,4 @@
+from django.core.exceptions import PermissionDenied
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -19,7 +20,6 @@ class MainView(ListView):
 
 class DefaultPostListView(ListView):
     model = Post
-    context_object_name = 'posts'
 
     def get_queryset(self):
         return super().get_queryset().filter(owner__isnull=True)
@@ -27,13 +27,41 @@ class DefaultPostListView(ListView):
 
 class PremiumPostListView(ListView):
     model = Post
-    context_object_name = 'posts'
 
     def get_queryset(self):
         return super().get_queryset().filter(owner__isnull=False)
+
+
+class PostDetailView(DetailView):
+    model = Post
 
 
 class PostCreateView(CreateView):
     model = Post
     form_class = PostForm
     success_url = reverse_lazy('blog:premium_list',)
+
+
+class PostUpdateView(LoginRequiredMixin, UpdateView):
+    model = Post
+    login_url = '../../users/'
+    redirect_field_name = 'redirect_to'
+    form_class = PostForm
+
+    def get_success_url(self):
+        return reverse('blog:post_detail', args=[self.kwargs.get('pk')])
+
+    def get_object(self, queryset=None):
+        if self.object.owner != self.request.user:
+            return PermissionDenied("You're not the owner of this post")
+
+
+class PostDeleteView(LoginRequiredMixin, DeleteView):
+    model = Post
+    login_url = '../../users/'
+    redirect_field_name = 'redirect_to'
+    success_url = reverse_lazy('blog:premium_list')
+
+    def get_object(self, queryset=None):
+        if self.object.owner != self.request.user:
+            return PermissionDenied("You're not the owner of this post")
