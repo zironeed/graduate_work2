@@ -6,9 +6,9 @@ NULLABLE = {'null': True, 'blank': True}
 
 
 class Post(models.Model):
-    title = models.CharField(max_length=50, verbose_name='Post_title')
-    description = models.TextField(verbose_name='Post_description')
-    image = models.ImageField(upload_to='media/post/', **NULLABLE, verbose_name='Post_image')
+    title = models.CharField(max_length=50, verbose_name='Title')
+    description = models.TextField(verbose_name='Description')
+    image = models.ImageField(upload_to='media/post/', **NULLABLE, verbose_name='Image')
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, **NULLABLE, verbose_name='Post_owner')
 
     class Meta:
