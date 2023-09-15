@@ -1,0 +1,19 @@
+{% extends 'blog/base.html' %}
+{% load custom_tags %}
+
+{% block content %}
+<div class="col-12">
+    <div class="row text-center">
+        <p>
+        <h4 class="my-0 font-weight-normal">Opinion about {{ post.title }}</h4>
+        <p>
+        <p>
+            The author believes, that {{ post.description }}
+        </p>
+        <p>
+            <img src="{% mediapath post.image %}" width="400"/>
+        </p>
+    </div>
+</div>
+
+{% endblock %}
