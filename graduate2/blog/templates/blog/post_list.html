@@ -1,4 +1,5 @@
 {% extends 'blog/base.html' %}
+{% load custom_tags %}
 
 {% block content %}
 
@@ -6,5 +7,31 @@
     <p class="lead">Your opinion about everything</p>
 </div>
 
+<div class="row text-center">
+
+    {% for post in post_list %}
+
+    <div class="col-4">
+        <div class="card mb-4 box-shadow">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">{{ post.title }}</h4>
+            </div>
+            <div class="card-body">
+                <img src="{% mediapath post.image %}" width="200"/><p>
+                <a href="{% url 'blog:post_detail' post.pk %}"
+                   class="w-50 btn btn-lg btn-outline-primary">Read</a></p>
+                {% if request.user|is_owner:post %}
+                <a href="{% url 'blog:post_update' post.pk %}"
+                   class="w-50 btn btn-lg btn-outline-primary">Edit</a>
+                <a href="{% url 'blog:post_delete' post.pk %}"
+                   class="w-50 btn btn-lg btn-outline-warning">Delete</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    {% endfor %}
+
+</div>
 
 {% endblock %}
