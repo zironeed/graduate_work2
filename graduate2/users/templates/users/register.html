@@ -1,0 +1,48 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<div class="col-12">
+    <div class="row">
+        <h1>Registration</h1>
+        <div class="col-4">
+            <div class="card">
+                <div class="card-body">
+
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="{{ form.phone_number.id_for_label }}">Phone number (without +7)</label>
+                            <p>
+                                {{ form.phone_number }}
+                            </p>
+                        </div>
+                        {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                            <li
+                            {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                        <div class="form-group">
+                            <label for="{{ form.password1.id_for_label }}">Password</label>
+                            <p>
+                                {{ form.password1 }}
+                            </p>
+                        </div>
+                        <div class="form-group">
+                            <label for="{{ form.password2.id_for_label }}">Confirm password</label>
+                            <p>
+                                {{ form.password2 }}
+                            </p>
+                        </div>
+                        <button type="submit" class="btn btn-success">
+                            Continue
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
