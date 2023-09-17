@@ -26,8 +26,7 @@ class LoginView(TitleMixin, BaseLogin):
 
 
 class LogoutView(TitleMixin, BaseLogout):
-    template_name = 'users/logout.html'
-    title = 'Log out'
+    pass
 
 
 class RegisterView(TitleMixin, CreateView):
