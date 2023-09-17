@@ -10,7 +10,7 @@ class StyleFormMixin:
             field.widget.attrs['class'] = 'form-control'
 
 
-class PostForm(forms.ModelForm):
+class PostForm(StyleFormMixin, forms.ModelForm):
 
     class Meta:
         model = Post
