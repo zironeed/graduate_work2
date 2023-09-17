@@ -18,7 +18,7 @@
             <a class="p-2 btn btn-outline-primary" href="#">Log Out</a>
             {% else %}
             <a class="p-2 btn btn-outline-primary" href="#">Log In</a>
-            <a class="p-2 btn btn-outline-primary" href="#">Registration</a>
+            <a class="p-2 btn btn-outline-primary" href="{% url 'users:user_register' %}">Registration</a>
             {% endif %}
         </nav>
     </div>
