@@ -51,7 +51,7 @@ class RegisterView(TitleMixin, CreateView):
         user.is_active = False
         user.save()
 
-        return redirect('users:email_confirmation_sent')
+        return redirect('users:user_payment')
 
 
 class PaymentView(View):
