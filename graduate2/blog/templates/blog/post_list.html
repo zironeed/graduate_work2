@@ -17,7 +17,7 @@
                 <h4 class="my-0 font-weight-normal">{{ post.title }}</h4>
             </div>
             <div class="card-body">
-                <img src="{% mediapath post.image %}" width="200"/><p>
+                <img src="{% mediapath post.image %}" class="post-image" alt="Post Image"/><p>
                 <a href="{% url 'blog:post_detail' post.pk %}"
                    class="w-50 btn btn-lg btn-outline-primary">Read</a></p>
                 {% if request.user|is_owner:post %}

@@ -12,6 +12,6 @@ def is_owner(user, post):
 def get_media_path_tag(image_path):
 
     if image_path:
-        return f"/media/post/{image_path}"
+        return f"/media/{image_path}"
 
     return 'No image'
