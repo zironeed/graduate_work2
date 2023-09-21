@@ -41,7 +41,7 @@ class PostCreateView(CreateView):
     success_url = reverse_lazy('blog:premium_list',)
 
     def form_valid(self, form):
-        if not self.request.user:
+        if not self.request.user.is_authenticated:
             return super().form_valid(form)
 
         form.instance.owner = self.request.user
