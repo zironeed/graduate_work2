@@ -1,4 +1,5 @@
 from django.core.exceptions import PermissionDenied
+from django.db.models import Q
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
@@ -21,7 +22,7 @@ class DefaultPostListView(ListView):
     model = Post
 
     def get_queryset(self):
-        return super().get_queryset().filter(owner__isnull=True)
+        return super().get_queryset().filter(Q(owner__isnull=True) | Q(owner__is_community=False))
 
 
 class PremiumPostListView(ListView):
