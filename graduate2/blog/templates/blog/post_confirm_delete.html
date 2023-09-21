@@ -9,8 +9,8 @@
                 <div class="card-body">
                     <form method="post">
                         {% csrf_token %}
-                        <p>Do you really want to delete post "{{ product.title }}"?</p>
-                        <button type="submit" class="btn btn-success">Confirm</button>
+                        <p>Do you really want to delete post "{{ post.title }}"?</p>
+                        <button type="submit" class="btn btn-success">Confirm</button><p></p>
                         <a href="{% url 'blog:premium_list' %}" class="btn btn-warning">Cancel</a>
                     </form>
                 </div>

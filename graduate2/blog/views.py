@@ -58,8 +58,15 @@ class PostUpdateView(LoginRequiredMixin, UpdateView):
         return reverse('blog:post_detail', args=[self.kwargs.get('pk')])
 
     def get_object(self, queryset=None):
-        if self.object.owner != self.request.user:
-            return PermissionDenied("You're not the owner of this post")
+        obj = super().get_object(queryset=queryset)
+        if obj.owner != self.request.user:
+            raise PermissionDenied("You're not the owner of this post")
+
+        return obj
+
+    def form_valid(self, form):
+        form.instance.owner = self.request.user
+        return super().form_valid(form)
 
 
 class PostDeleteView(LoginRequiredMixin, DeleteView):
@@ -69,5 +76,8 @@ class PostDeleteView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('blog:premium_list')
 
     def get_object(self, queryset=None):
-        if self.object.owner != self.request.user:
+        obj = super().get_object(queryset=queryset)
+        if obj.owner != self.request.user:
             return PermissionDenied("You're not the owner of this post")
+
+        return obj
