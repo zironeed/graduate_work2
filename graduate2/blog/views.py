@@ -1,4 +1,5 @@
 from django.core.exceptions import PermissionDenied
+from django.db.models import Q
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -29,7 +30,7 @@ class PremiumPostListView(ListView):
     model = Post
 
     def get_queryset(self):
-        return super().get_queryset().filter(owner__isnull=False)
+        return super().get_queryset().filter(owner__is_community=True)
 
 
 class PostDetailView(DetailView):
@@ -40,6 +41,13 @@ class PostCreateView(CreateView):
     model = Post
     form_class = PostForm
     success_url = reverse_lazy('blog:premium_list',)
+
+    def form_valid(self, form):
+        if not self.request.user:
+            return super().form_valid(form)
+
+        form.instance.owner = self.request.user
+        return super().form_valid(form)
 
 
 class PostUpdateView(LoginRequiredMixin, UpdateView):
