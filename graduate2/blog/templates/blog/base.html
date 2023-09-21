@@ -1,0 +1,71 @@
+<load static>
+    <!doctype html>
+    <html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>YourOpinion</title>
+        <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+    <body>
+    {% if user.is_authenticated and not user.is_community %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    Your account is not yet part of the community. Click on the button if you want to become a community.
+    <a href="{% url 'users:payment' %}" class="btn btn-success">Pay</a>
+</div>
+{% endif %}
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+        <h5 class="my-0 mr-md-auto font-weight-normal">YO</h5>
+        <nav class="ms-auto justify-content-end">
+            <a class="p-2 btn btn-outline-primary" href="{% url 'blog:post_create' %}">Make Opinion</a>
+            <a class="p-2 btn btn-outline-primary" href="{% url 'blog:default_list' %}">Society</a>
+            <a class="p-2 btn btn-outline-primary" href="{% url 'blog:premium_list' %}">Community</a>
+            {% if user.is_authenticated %}
+            <a class="p-2 btn btn-outline-primary" href="{% url 'users:logout' %}">Log Out</a>
+            {% else %}
+            <a class="p-2 btn btn-outline-primary" href="{% url 'users:login' %}">Log In</a>
+            <a class="p-2 btn btn-outline-primary" href="{% url 'users:user_register' %}">Registration</a>
+            {% endif %}
+        </nav>
+    </div>
+
+    {% block content %}
+    {% endblock %}
+
+    <div class="container">
+        <footer class="pt-4 my-md-5 pt-md-5 border-top">
+            <div class="row">
+                <div class="col-12 col-md">
+                    YourOpinion
+                    <small class="d-block mb-3 text-muted">&copy; 2077</small>
+                </div>
+                <div class="col-6 col-md">
+                    <h5>Categories</h5>
+                    <ul class="list-unstyled text-small">
+                        <li><a class="text-muted" href="#">Community</a></li>
+                        <li><a class="text-muted" href="#">Community's opinion</a></li>
+                        <li><a class="text-muted" href="#">Society's opinion</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md">
+                    <h5>Additional</h5>
+                    <ul class="list-unstyled text-small">
+                        <li><a class="text-muted" href="#">Leaders</a></li>
+                        <li><a class="text-muted" href="https://www.youtube.com/">YouTube</a></li>
+                        <li><a class="text-muted" href="https://translate.google.ru/">Google translate</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md">
+                    <h5>About us</h5>
+                    <ul class="list-unstyled text-small">
+                        <li><a class="text-muted" href="#">Contacts</a></li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="/static/js/bootstrap.bundle.min.js"></script>
+    </body>
+    </html>
+</load>
