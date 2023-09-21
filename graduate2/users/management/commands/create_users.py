@@ -6,6 +6,11 @@ from users.models import User
 class Command(BaseCommand):
 
     def handle(self, *args, **options):
+        check_admin = User.objects.filter(phone_number=1111111111)
+
+        if check_admin:
+            return 'We already have users!'
+
         admin = User.objects.create(
             phone_number=1111111111,
             is_community=True,
