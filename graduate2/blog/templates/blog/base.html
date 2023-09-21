@@ -8,6 +8,12 @@
         <link href="/static/css/bootstrap.min.css" rel="stylesheet">
     </head>
     <body>
+    {% if user.is_authenticated and not user.is_community %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    Your account is not yet part of the community. Click on the button if you want to become a community.
+    <a href="{% url 'users:payment' %}" class="btn btn-success">Pay</a>
+</div>
+{% endif %}
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
         <h5 class="my-0 mr-md-auto font-weight-normal">YO</h5>
         <nav class="ms-auto justify-content-end">
