@@ -116,9 +116,9 @@ def webhook(request):
         event = stripe.Webhook.construct_event(
             payload, signature_header, settings.STRIPE_WEBHOOK
         )
-    except ValueError as e:
+    except ValueError:
         return HttpResponse(status=400)
-    except stripe.error.SignatureVerificationError as e:
+    except stripe.error.SignatureVerificationError:
         return HttpResponse(status=400)
 
     if event['type'] == 'checkout_session_completed':
@@ -127,7 +127,6 @@ def webhook(request):
         time.sleep(15)
 
         user_payment = UserPayment.objects.get(payment_id=session_id)
-        line_items = stripe.checkout.Session.list_line_items(session_id, limit=1)
         user_payment.is_paid = True
         user_payment.save()
 
