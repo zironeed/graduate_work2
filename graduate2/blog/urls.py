@@ -8,8 +8,8 @@ app_name = BlogConfig.name
 
 
 urlpatterns = [
-    path('posts/free/', DefaultPostListView.as_view(), name='default_list'),
-    path('posts/premium/', PremiumPostListView.as_view(), name='premium_list'),
+    path('posts/society/', DefaultPostListView.as_view(), name='default_list'),
+    path('posts/community/', PremiumPostListView.as_view(), name='premium_list'),
     path('posts/create/', PostCreateView.as_view(), name='post_create'),
     path('posts/detail/<int:pk>/', PostDetailView.as_view(), name='post_detail'),
     path('post/update/<int:pk>/', PostUpdateView.as_view(), name='post_update'),
