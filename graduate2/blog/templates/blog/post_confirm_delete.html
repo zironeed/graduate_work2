@@ -11,7 +11,7 @@
                         {% csrf_token %}
                         <p>Do you really want to delete post "{{ product.title }}"?</p>
                         <button type="submit" class="btn btn-success">Confirm</button>
-                        <a href="{% url 'catalog:view' %}" class="btn btn-warning">Cancel</a>
+                        <a href="{% url 'blog:premium_list' %}" class="btn btn-warning">Cancel</a>
                     </form>
                 </div>
             </div>
