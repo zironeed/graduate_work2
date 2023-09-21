@@ -1,6 +1,4 @@
 from django.core.exceptions import PermissionDenied
-from django.db.models import Q
-from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView

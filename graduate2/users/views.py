@@ -2,15 +2,11 @@ import time
 
 from django.contrib.auth.views import LoginView as BaseLogin
 from django.contrib.auth.views import LogoutView as BaseLogout
-from django.contrib.auth.views import PasswordResetView, PasswordResetConfirmView, \
-    PasswordResetCompleteView, PasswordResetDoneView
-from django.views import View
-from django.views.generic import CreateView, TemplateView
+from django.views.generic import CreateView
 
 from django.urls import reverse_lazy
 from django.contrib import messages
-from django.core.exceptions import ValidationError
-from django.shortcuts import redirect, reverse, render
+from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.http import HttpResponse
