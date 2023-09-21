@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'users',
 ]
 
-SITE_NAME = "127.0.0.1:8000"
+SITE_NAME = "http://127.0.0.1:8000"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -146,8 +146,6 @@ AUTH_USER_MODEL = 'users.User'
 LOGOUT_REDIRECT_URL = '/'
 LOGIN_REDIRECT_URL = '/'
 
-EMAIL_HOST = os.getenv('EMAIL_HOST')
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
-EMAIL_PORT = os.getenv('EMAIL_PORT')
-EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS') == 'True'
+PRODUCT_PRICE = os.getenv('PRICE')
+STRIPE_API = os.getenv('STRIPE_API')
+STRIPE_WEBHOOK = os.getenv('WEBHOOK_SECRET')
